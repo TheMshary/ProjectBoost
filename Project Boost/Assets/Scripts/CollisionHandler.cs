@@ -15,14 +15,30 @@ public class CollisionHandler : MonoBehaviour
     AudioSource audioSource;
 
     bool isTransitioning = false;
+    bool collisionDisabled = false;
 
     void Start()
     {
         audioSource = GetComponent<AudioSource>();
     }
 
+    void Update()
+    {
+        RespondToDebugKeys();
+    }
+
+    void RespondToDebugKeys()
+    {
+        if (Input.GetKeyDown(KeyCode.C))
+        {
+            collisionDisabled = !collisionDisabled; // toggle collision
+        }
+    }
+
     void OnCollisionEnter(Collision other)
     {
+        if (isTransitioning | collisionDisabled) { return; }
+
         switch (other.gameObject.tag)
         {
             case "Friendly":
@@ -43,31 +59,25 @@ public class CollisionHandler : MonoBehaviour
 
     void StartCrashSequence()
     {
-        if (!isTransitioning)
-        {
-            audioSource.Stop(); // stop existing sfx
-            crashParticles.Play(); // particles
-            GetComponent<Movement>().enabled = false; // disable movement
-            audioSource.PlayOneShot(crash, 0.6f); // sfx
-            Invoke("ReloadLevel", levelLoadDelay); // reload level
-        }
         isTransitioning = true;
+        audioSource.Stop(); // stop existing sfx
+        crashParticles.Play(); // particles
+        GetComponent<Movement>().enabled = false; // disable movement
+        audioSource.PlayOneShot(crash, 0.6f); // sfx
+        Invoke("ReloadLevel", levelLoadDelay); // reload level
     }
     
     void StartSuccessSequence()
     {
-        if (!isTransitioning)
-        {
-            audioSource.Stop(); // stop existing sfx
-            successParticles.Play(); // particles
-            GetComponent<Movement>().enabled = false; // disable movement
-            audioSource.PlayOneShot(success, 0.6f); // sfx
-            Invoke("LoadNextLevel", levelLoadDelay); // load next level
-        }
         isTransitioning = true;
+        audioSource.Stop(); // stop existing sfx
+        successParticles.Play(); // particles
+        GetComponent<Movement>().enabled = false; // disable movement
+        audioSource.PlayOneShot(success, 0.6f); // sfx
+        Invoke("LoadNextLevel", levelLoadDelay); // load next level
     }
 
-    void LoadNextLevel()
+    public void LoadNextLevel()
     {
         int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
         int nextSceneIndex = currentSceneIndex + 1;
