@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class DebugCheats : MonoBehaviour
+public class Cheats : MonoBehaviour
 {
     
     CollisionHandler collisionHandlerScript;

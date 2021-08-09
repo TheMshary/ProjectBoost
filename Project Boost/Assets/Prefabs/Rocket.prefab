@@ -423,7 +423,7 @@ GameObject:
   - component: {fileID: 1895627189}
   - component: {fileID: 6739014248575656471}
   - component: {fileID: 6491063761508875195}
-  - component: {fileID: 1587566984255129012}
+  - component: {fileID: 300054302010924183}
   m_Layer: 0
   m_Name: Rocket
   m_TagString: Untagged
@@ -635,7 +635,7 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1.4138323, y: 0.606066, z: 1}
   m_Center: {x: -0.009247839, y: -0.90647507, z: 0}
---- !u!114 &1587566984255129012
+--- !u!114 &300054302010924183
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
