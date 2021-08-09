@@ -45,11 +45,11 @@ public class CollisionHandler : MonoBehaviour
     {
         if (!isTransitioning)
         {
-            audioSource.Stop();
-            crashParticles.Play();
-            GetComponent<Movement>().enabled = false;
-            audioSource.PlayOneShot(crash, 0.6f);
-            Invoke("ReloadLevel", levelLoadDelay);
+            audioSource.Stop(); // stop existing sfx
+            crashParticles.Play(); // particles
+            GetComponent<Movement>().enabled = false; // disable movement
+            audioSource.PlayOneShot(crash, 0.6f); // sfx
+            Invoke("ReloadLevel", levelLoadDelay); // reload level
         }
         isTransitioning = true;
     }
@@ -58,11 +58,11 @@ public class CollisionHandler : MonoBehaviour
     {
         if (!isTransitioning)
         {
-            audioSource.Stop();
-            successParticles.Play();
-            GetComponent<Movement>().enabled = false;
-            audioSource.PlayOneShot(success, 0.6f);
-            Invoke("LoadNextLevel", levelLoadDelay);
+            audioSource.Stop(); // stop existing sfx
+            successParticles.Play(); // particles
+            GetComponent<Movement>().enabled = false; // disable movement
+            audioSource.PlayOneShot(success, 0.6f); // sfx
+            Invoke("LoadNextLevel", levelLoadDelay); // load next level
         }
         isTransitioning = true;
     }
